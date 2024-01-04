@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <time.h>
+#define array_nums 100000
 
 /* 数组做函数参数会自动弱化成指针 */
 int printArray(int *array, int length)
@@ -6,7 +8,7 @@ int printArray(int *array, int length)
     int ret = 0;
     for (int idx = 0; idx < length; idx++)
     {
-        printf("array[%d] = %d\n", idx, array[idx]);
+        printf("array[%d] = %d\t", idx, array[idx]);
     }
     return ret;
 }
@@ -125,7 +127,18 @@ int quickSort02(int *array, int start, int end)
 
 int main()
 {
-    int array[] = {54, 78, 100, 89, 127, 128};
+    clock_t start_time, end_time;
+    double elapsed_time;
+
+    start_time = clock();
+
+    int array[array_nums];
+    for(int idx = 0; idx < array_nums; idx++)
+    {
+        array[idx] = array_nums - idx; 
+    }
+
+
     int length = sizeof(array) / sizeof(array[0]);
 #if 0
     quickSort01(array, 0, length - 1);
@@ -134,5 +147,9 @@ int main()
     quickSort02(array, 0, length);
 #endif
     printArray(array, length);
+
+    end_time = clock();
+    elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+    printf("代码执行时间为 %f 秒\n", elapsed_time);
     return 0;
 }
