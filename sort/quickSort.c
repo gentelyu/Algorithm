@@ -13,7 +13,7 @@ int printArray(int *array, int length)
     return ret;
 }
 
-#if 0
+#if 1
 int quickSort01(int *array, int start, int end)
 {
     int ret = 0;
@@ -125,6 +125,51 @@ int quickSort02(int *array, int start, int end)
     return ret;
 }
 
+#if 0
+/* 剑指offer排序算法C++版 */
+/* Partition函数用于在数组中取一个随即索引，并将小于索引对应的值放到他前面 */
+int Partition(int data[], int length, int start, int end)
+{
+    if(data == NULL || length <= 0 || start < 0 || end >= length)
+        return -1;
+    
+    /* 获得随机索引index，并与最后一个元素进行交换，RandomInRange自己实现：获得一个随机值 */
+    int index = RandomInRange(start, end);
+    Swap(&data[index], &data[end]);
+
+    /* small 记录当前小于分区点元素的最后位置 */
+    int small = -1;
+    for (index = start; index < end; index++)
+    {
+        if (data[index] < data[end])
+        {
+            /* 更新small位置 */
+            ++small;
+            if (small != index)
+                Swap(&data[index], &data[small]);
+        }
+    }
+
+    ++small;
+    Swap(&data[small], &data[end]);
+
+    return small;
+}
+
+int QuickSort3(int data[], int length, int start, int end)
+{
+    int ret = 0;
+    if (start == end)
+        return -1;
+    
+    int index = Partition(data, length, start, end);
+    if (index > start)
+        QuickSort3(data, length, start, index - 1);
+    if (index < end)
+        QuickSort3(data, length, index + 1, end);
+}
+#endif
+
 int main()
 {
     clock_t start_time, end_time;
@@ -140,7 +185,7 @@ int main()
 
 
     int length = sizeof(array) / sizeof(array[0]);
-#if 0
+#if 1
     quickSort01(array, 0, length - 1);
 #else
     /* 快速排序 */
