@@ -40,6 +40,7 @@ int Partition(int data[], int length, int begin, int end)
     int index = GetSrandNum(begin, end);
     Swap(&data[index], &data[end]);
 
+    /* 已经排好的小于索引值的位置索引 */
     int small = begin -1;
     for (int idx = begin; idx < end; idx++)
     {
@@ -88,8 +89,8 @@ int main()
     try
     {
         FastSort(array, length, 0, 999);
-        // 为什么会先抛出异常？？？？
-        FastSort(array, length, 0,1000);
+        
+        FastSort(array, length, 0,1000);// 为什么会先抛出异常？？？？
     } 
     catch (const char *msg)
     {

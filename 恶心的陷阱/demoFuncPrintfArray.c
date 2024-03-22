@@ -36,7 +36,7 @@ int main()
 
 
 #if 1
-    printfArray(array);
+    printfArray(array); 
 #else
 
     for(int idx = 0; idx < len; idx++)
